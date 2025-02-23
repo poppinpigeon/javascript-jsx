@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 type Todo = {
     id: number;
@@ -14,6 +16,8 @@ const TodoList : React.FC = ()=>{
         {id: 3, text: "eat", isChecked: false}
     ]);
 
+    const [newTodo, setNewTodo] = useState<string>('');
+
     const handleCheckedChange = (itemId: number)=>{
         setTodos((items)=>(
             items.map((item)=>(
@@ -22,9 +26,21 @@ const TodoList : React.FC = ()=>{
         ))
     }
 
+    const addTodo = ()=> {
+        if(newTodo.trim() !== ''){
+            setTodos([...todos, {id: Date.now(), text: newTodo, isChecked: false}]);
+            setNewTodo('');
+        }
+    }
+
     return(
         <div className="container">
             <h1>{title}</h1>
+            <div style={{display: "flex"}}>
+                <Form.Control type="text" placeholder="type your todo here" onChange={(e)=> setNewTodo(e.target.value)}/>
+                <Button variant="primary" onClick={()=> addTodo()}>Add</Button>
+            </div>
+            <p></p>
             <div className="board">
                 <ul>
                     {
