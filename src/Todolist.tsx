@@ -9,7 +9,7 @@ type Todo = {
 };
 
 const TodoList : React.FC = ()=>{
-    const title : string = "Today";
+    const title : string = "Today's Todos";
     const [todos, setTodos] = useState<Todo[]>([
         {id: 1, text: "study", isChecked: false}, 
         {id: 2, text: "sleep", isChecked: false}, 
@@ -38,7 +38,7 @@ const TodoList : React.FC = ()=>{
             <h1>{title}</h1>
             <div style={{display: "flex"}}>
                 <Form.Control type="text" placeholder="type your todo here" onChange={(e)=> setNewTodo(e.target.value)}/>
-                <Button variant="primary" onClick={()=> addTodo()}>Add</Button>
+                <Button variant="primary" onClick={()=> addTodo()} style={{marginLeft: "20px"}}>Add</Button>
             </div>
             <p></p>
             <div className="board">
